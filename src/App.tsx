@@ -1,9 +1,10 @@
 import './App.css'
+import ShopLayout from './ShopLayout'
 
 function App() {
   return(
     <>
-      <h1 className='text-lg p-4 border'>Hello React</h1>
+      <ShopLayout />
     </>
   )
 }
