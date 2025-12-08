@@ -51,11 +51,22 @@ export default function ProductsGrid() {
 
     const [ products, setProducts ] = useState<Product[]>( allProducts )
 
+    function handleAddToCart( product_id: number ) {
+        const productToAdd = products.find( p => p.id === product_id )
+        console.log(productToAdd)
+    }
+
     return (
         <div className="grid w-full grid-cols-2 gap-6">
             {
                 /* singleProduct prop = product object (interface Product) */
-                products.map( ( product ) => <SingleProductCard key={product.id} singleProduct = {product} /> )
+                products.map( ( product ) => 
+                    <SingleProductCard 
+                    key={product.id} 
+                    singleProduct = {product} 
+                    addToCartHandler = {handleAddToCart}
+                    /> 
+                )
             }
         </div>
     )

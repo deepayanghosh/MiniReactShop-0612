@@ -2,7 +2,13 @@ import { Heart, ShoppingCart } from "lucide-react";
 import { ProductRating } from "./ProductRating";
 import type { Product } from "./ProductsGrid";
 
-export default function SingleProductCard( {singleProduct}: {singleProduct: Product} ) {
+interface SingleProductCardProps {
+    singleProduct: Product,
+    addToCartHandler: (product_id: number) => void
+}
+
+export default function SingleProductCard( {singleProduct, addToCartHandler}: SingleProductCardProps ) {
+
     return (
         <div className="h-[360px] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
             <div className="relative">
@@ -26,7 +32,10 @@ export default function SingleProductCard( {singleProduct}: {singleProduct: Prod
                 <div className="flex items-center gap-3">
                 <span className="text-xl font-bold text-gray-900">$35.00</span>
                 <span className="text-md text-gray-400 line-through">$70.00</span>
-                <button className="ml-auto flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-full font-medium hover:bg-emerald-700 transition-colors">
+                <button 
+                className="ml-auto flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-full font-medium hover:bg-emerald-700 transition-colors"
+                onClick={ () => addToCartHandler( singleProduct.id ) }
+                >
                     <ShoppingCart className="w-5 h-5" /> Add
                 </button>
                 </div>
