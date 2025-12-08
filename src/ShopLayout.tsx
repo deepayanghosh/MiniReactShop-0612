@@ -36,7 +36,7 @@ export default function ShopLayout() {
                     isCartOpen ? 'translate-x-0' : 'translate-x-full'
                 }`}>
                     <div className="">
-                        <ShoppingCartSidebar />
+                        <ShoppingCartSidebar cartOpenSetter = {setIsCartOpen} />
                     </div>
                 
             </div>

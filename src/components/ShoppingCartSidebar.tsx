@@ -43,7 +43,7 @@ export default function ShoppingCartSidebar( {cartOpenSetter} : cartOpenStatus )
                         <Truck className="w-6 h-6 text-green-600" />
                         </div>
                         <div>
-                        <p className="font-medium">Delivery in 8 minutes</p>
+                        <p className="font-medium">Delivery in 2 days</p>
                         <p className="text-sm text-gray-500">Shipment of 1 item</p>
                         </div>
                     </div>
