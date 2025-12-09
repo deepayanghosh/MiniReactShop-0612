@@ -1,5 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import SingleProductCard from "./SingleProductCard";
+import type { cartItem } from "./ShoppingCartSidebar";
 
 const productDefaultImg = '/react-display-1.webp';
 
@@ -47,13 +48,40 @@ const allProducts: Product[] = [
     }
 ]
 
-export default function ProductsGrid() {
+interface ProductsGridProps {
+    cartItems: cartItem[],
+    setCartItems: React.Dispatch< React.SetStateAction<cartItem[]> >
+}
+
+export default function ProductsGrid( {cartItems, setCartItems}: ProductsGridProps ) {
 
     const [ products, setProducts ] = useState<Product[]>( allProducts )
 
     function handleAddToCart( product_id: number ) {
+        
         const productToAdd = products.find( p => p.id === product_id )
-        console.log(productToAdd)
+
+        if ( ! productToAdd ) return
+
+        setCartItems( prev => {
+            const existing = prev.find(c => c.product_id === product_id)
+            if( existing ) {
+                // increment quantity
+                return prev.map( i => i.product_id === product_id 
+                    ? { ...i, in_cart: i.in_cart + 1 }
+                    : i
+                )
+            }
+            const newItem: cartItem = {
+                cart_id: crypto.randomUUID(),
+                product_id: productToAdd.id,
+                name: productToAdd.name,
+                image: productToAdd.image,
+                price: productToAdd.price,
+                in_cart: 1
+            }
+            return [ ...prev, newItem ]
+        } )
     }
 
     return (

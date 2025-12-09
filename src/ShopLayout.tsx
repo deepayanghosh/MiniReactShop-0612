@@ -2,13 +2,14 @@
 
 import { useState } from 'react';
 import { ShoppingCartIcon } from 'lucide-react';
-import ShoppingCartSidebar from './components/ShoppingCartSidebar';
+import ShoppingCartSidebar, { type cartItem } from './components/ShoppingCartSidebar';
 import ProductsGrid from './components/ProductsGrid';
 import ProductsGridTopBar from './components/ProductsGridTopBar';
 import ProductFilterOptions from './components/ProductFilterOptions';
 
 export default function ShopLayout() {
-    const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+    const [ isCartOpen, setIsCartOpen ] = useState<boolean>(false);
+    const [ cartItems, setCartItems ] = useState<cartItem[]>([]);
 
     return (
         <>
@@ -28,7 +29,7 @@ export default function ShopLayout() {
                 </div>
                 {/* Product Grid */}
                 <div className="flex-1 p-6">
-                    <ProductsGrid />
+                    <ProductsGrid cartItems = {cartItems} setCartItems = {setCartItems} />
                 </div>
             </div>
             {/* Right Sidebar for Shopping Cart & Other Content */}
@@ -36,7 +37,11 @@ export default function ShopLayout() {
                     isCartOpen ? 'translate-x-0' : 'translate-x-full'
                 }`}>
                     <div className="">
-                        <ShoppingCartSidebar cartOpenSetter = {setIsCartOpen} />
+                        <ShoppingCartSidebar 
+                        cartItems = {cartItems} 
+                        setCartItems = {setCartItems}
+                        cartOpenSetter = {setIsCartOpen} 
+                        />
                     </div>
                 
             </div>

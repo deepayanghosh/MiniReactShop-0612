@@ -4,11 +4,22 @@ import React, { useState } from 'react';
 import { X, Truck, Tag, Plus, Minus, ShoppingCartIcon } from 'lucide-react';
 import SingleCartItem from './SingleCartItem';
 
-interface cartOpenStatus {
+interface ShoppingCartSidebarProps {
+    cartItems: cartItem[],
+    setCartItems: React.Dispatch< React.SetStateAction<cartItem[]> >
     cartOpenSetter: React.Dispatch< React.SetStateAction<boolean> >
 }
 
-export default function ShoppingCartSidebar( {cartOpenSetter} : cartOpenStatus ) {
+export interface cartItem {
+    cart_id: string,
+    product_id: number
+    name: string,
+    image: string
+    price: number,
+    in_cart: number
+}
+
+export default function ShoppingCartSidebar( {cartItems, cartOpenSetter} : ShoppingCartSidebarProps ) {
 
     const [ coupon, setCoupon ] = useState('EXTRA10'); // Applied coupon
 
